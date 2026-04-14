@@ -44,7 +44,7 @@ class fvmutaciones(QtWidgets.QDialog):
             print(f"Uno de los widgets no existe: {e} ")
 
     def compareProtein(self):
-        #https://www.ncbi.nlm.nih.gov/tools/cobalt/cobalt.cgi?LINK_LOC=BlastHomeLink
+
         fastaTypo = (
             f">Proteína_No_Modificada\n{self.peptide}\n"
             f">Proteína_Mutada\n{self.New_Peptide}"
