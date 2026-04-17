@@ -3,4 +3,4 @@ This is also my first time using Github, so i dont even know how to organize the
 or just reorganize the files. Also feel free to comment and review the software! Thanks!
 
 Conditions: Feel free to use it according to the license that i have. If this software (Bioskim_BioinformaticsTool) is used in any sort of ways that can account to plagiarism
-i do not hold accountable for you desicions and any 'consequences' you may have due to the unrightful use of this software you must face them yourself.
+i do not hold accountable for you desicions and any 'consequences' you may have due to the unrightful use of this software; you must face them yourself.
