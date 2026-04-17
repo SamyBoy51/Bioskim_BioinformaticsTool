@@ -16,19 +16,18 @@ import resources_rc
 import webbrowser
 import urllib.parse
 
+#This class calls for the UI, and also all the functions inside when 'executing the window.
 class fvmutaciones(QtWidgets.QDialog):
     def __init__(self, frag, peptide, New_frag, New_Peptide):
         super(fvmutaciones, self).__init__()
         uic.loadUi('mutationFinal.ui', self)
-
+        #Definition of importeD vARIABLES; Here we create self.variables in order to execute them throughout other functions.
         self.frag = frag
         self.peptide = peptide
         self.New_frag = New_frag
         self.New_Peptide = New_Peptide
         try:
-            #print(f"se recibió {New_frag}")
-            #print(f"Los tipos de datos son: {type(frag)}, {type(peptide)}, {type(New_frag)}, {type(New_Peptide)}")
-            #Data Pass
+            #In here we check if the boxes exist (in order to avoid errors) and executes de function in order to display.
             if hasattr(self, 'old_DNA'):
                 self.old_DNA.setPlainText(frag)
             if hasattr(self, 'old_AA'):
@@ -109,14 +108,14 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             webbrowser.open(url)
         else:
             if hasattr(self, 'AnalysisResult'):
-                self.AnalysisResult.setText("Error: Primero Debe Realizar un Analysis")
+                self.AnalysisResult.setText("Error: You must First do an analysis.")
     def ejecutar_analysis(self):
         try:
             file = self.ruta
             rango = self.limits.text()
             if not file or not rango:
                 if hasattr(self, 'AnalysisResult'):
-                    self.AnalysisResult.setText("Falta seleccionar archivo o ingresar rango")
+                    self.AnalysisResult.setText("Must select a file and assign a range first.")
                 return
 
             result = analysis1.analysis(self.ruta, self.limits.text())
@@ -134,20 +133,21 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 #Recuerda que tu secuencia de proteínas en formato normal es protSeq
                 finalMSG = (
                 f"{result[0]}\n\n"
-                f"cadena complementaria (3'-5'):\n{result35}\n\n"
-                f"mARN complementario: \n{resultmArn}\n\n"
-                f"La secuencia proteíca es: \n{protSeq}\n\n"
-                f"Estadisticas:\n{texto_a}"
+                f"Complementary chain (3'-5'):\n{result35}\n\n"
+                f"Complementary mArn: \n{resultmArn}\n\n"
+                f"The protein sequence is: \n{protSeq}\n\n"
+                f"The ammount of amino acids in the peptide is: \n{len(protSeq)}\n\n"
+                f"Statistics:\n{texto_a}"
                 )
                 if hasattr(self, 'AnalysisResult'):
                     self.AnalysisResult.setText(finalMSG)
                 else:
-                    print("Error: No se encuentra el widget")
+                    print("Error: Widget not found.")
             else:
                 if hasattr(self, 'AnalysisResult'):
                     self.AnalysisResult.setText(str(result))
         except Exception as e:
-            print(f"Crash Evitado. Error: {e}")
+            print(f"Crash Avoided. Error: {e}")
     def PrimerAnalisis(self):
         if self.ruta:
             resultado = analysis1.readFile(self.ruta)
@@ -157,13 +157,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
                 self.resultGC.setText(f"GC% es: {percentage}%")
                 if hasattr(self, 'linneEdit'):
-                    self.linneEdit.setText(f"Hay {totalNucleotide} Nucletidos")
+                    self.linneEdit.setText(f"There are {totalNucleotide} Nucleotides.")
                 if hasattr(self, 'nucleotide'):
                     self.nucleotide.setText(f"{totalNucleotide}")
             else:
                 self.resultGC.setText(resultado)
         else:
-            self.resultGC.setText("Error: Porfavor seleccione archivo")
+            self.resultGC.setText("Error: Please Select a File.")
 
     def abrirMutaciones(self):
         #se verifica si hay un elemento para tomar (es decír poder obtener el fragmento)
